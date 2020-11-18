@@ -1,5 +1,7 @@
 package com.joyce.r2dbc.mysql.controller;
 
+import com.joyce.r2dbc.mysql.model.UserModel;
+import com.joyce.r2dbc.mysql.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,12 +20,11 @@ import reactor.core.publisher.Mono;
 @RestController
 public class UserController {
 
-    private DatabaseClient databaseClient;
+    private UserService userService;
 
     @RequestMapping("/user/saveOneRecord")
-    public Mono<Void> get() {
-        log.info("1111");
-        return null;
+    public Mono<UserModel> get() {
+        return userService.saveOneRecord();
     }
 
 }
