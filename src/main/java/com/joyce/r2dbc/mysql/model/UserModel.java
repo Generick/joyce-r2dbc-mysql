@@ -52,8 +52,7 @@ public class UserModel implements Serializable {
         return UserModel.builder()
                 .age(random.nextInt(100) + 1)
                 .username(UUID.randomUUID().toString())
-//                    .birthdayDateTime(ZonedDateTime.now().minusDays(random.nextInt(40 * 365 - 1))) // 最近的40年的任意一天作为生日
-                .birthdayDateTime(ZonedDateTime.now().minusDays(random.nextInt(40 * 365 - 1)))
+                .birthdayDateTime(ZonedDateTime.now().minusDays(random.nextInt(40 * 365 - 1)))// 最近的40年的任意一天作为生日
                 .remark("" + random.nextInt(10))
                 .createDateTime(ZonedDateTime.now())
                 .build();

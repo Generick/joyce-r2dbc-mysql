@@ -10,8 +10,8 @@
 	</parent>
 	<groupId>com.joyce.r2dbc.mysql</groupId>
 	<artifactId>joyce-r2dbc-mysql</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<version>2020.11.19-01</version>
+	<packaging>jar</packaging>
 	<name>joyce-r2dbc-mysql</name>
 	<description>Demo project for Spring Boot</description>
 

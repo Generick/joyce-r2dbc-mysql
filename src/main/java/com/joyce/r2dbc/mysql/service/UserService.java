@@ -4,11 +4,10 @@ import com.joyce.r2dbc.mysql.dao.UserRepository;
 import com.joyce.r2dbc.mysql.model.UserModel;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
-import org.springframework.r2dbc.core.DatabaseClient;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
+import reactor.util.function.Tuple2;
 
 /**
  * @author: Joyce Zhu
@@ -22,8 +21,21 @@ public class UserService {
     private UserRepository userRepository;
 
     public Mono<UserModel> saveOneRecord() {
-//        Mono<UserModel> user1 = userRepository.save(UserModel.getNewInstance());
-        Mono<UserModel> user2 = userRepository.save(UserModel.getNewInstance());
-        return user2;
+        return userRepository.save(UserModel.getNewInstance());
+    }
+
+    @Transactional
+    public Mono<Tuple2<UserModel, UserModel>> saveTwoRecord() {
+        return userRepository.save(UserModel.getNewInstance())
+                .zipWhen(userModel -> userRepository.save(UserModel.getNewInstance()))
+                .doOnError(e -> {
+                    log.error(e.getMessage(), e);
+                })
+                ;
+
+    }
+
+    public Mono<UserModel> findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 }
