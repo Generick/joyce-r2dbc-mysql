@@ -15,6 +15,6 @@ public class ZonedDateTimeSerialize extends JsonSerializer<ZonedDateTime> {
 
     @Override
     public void serialize(ZonedDateTime dateTime, JsonGenerator jsonGenerator, SerializerProvider serializers) throws IOException {
-        jsonGenerator.writeString(dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        jsonGenerator.writeString(dateTime.format(DateTimeFormatter.ofPattern(DatetimeConstant.yyyy_MM_dd_HH_mm_ss)));
     }
 }

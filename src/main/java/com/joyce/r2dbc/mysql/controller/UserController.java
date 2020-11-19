@@ -37,7 +37,13 @@ public class UserController {
 
     @RequestMapping("/user/findByUsername/{username}")
     public Mono<UserModel> findByUsername(@PathVariable("username") String username) {
-        return userService.findByUsername(username).subscribeOn(Schedulers.boundedElastic());
+        Mono<UserModel> user = userService.findByUsername(username)
+//                .subscribeOn(Schedulers.boundedElastic())
+                .doOnSuccess(userModel -> {
+                    log.info("------------------------- username = {}, age = {}", userModel.getUsername(), userModel.getAge());
+                })
+                ;
+        return user;
     }
 
 }

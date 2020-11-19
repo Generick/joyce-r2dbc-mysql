@@ -2,14 +2,17 @@ package com.joyce.r2dbc.mysql.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.joyce.r2dbc.mysql.util.DatetimeConstant;
 import com.joyce.r2dbc.mysql.util.ZonedDateTimeDeserializer;
 import com.joyce.r2dbc.mysql.util.ZonedDateTimeSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.convert.WritingConverter;
 import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.data.annotation.Id;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -35,16 +38,17 @@ public class UserModel implements Serializable {
 
     private Integer age;
 
+    @DateTimeFormat(style = DatetimeConstant.yyyy_MM_dd_HH_mm_ss)
     @Column(name = "birthday_date_time")
-    @JsonDeserialize(using = ZonedDateTimeDeserializer.class)
-    @JsonSerialize(using = ZonedDateTimeSerialize.class)
+//    @JsonDeserialize(using = ZonedDateTimeDeserializer.class)
+//    @JsonSerialize(using = ZonedDateTimeSerialize.class)
     private ZonedDateTime birthdayDateTime;
 
     private String remark;
 
     @Column(name = "create_date_time")
-    @JsonDeserialize(using = ZonedDateTimeDeserializer.class)
-    @JsonSerialize(using = ZonedDateTimeSerialize.class)
+//    @JsonDeserialize(using = ZonedDateTimeDeserializer.class)
+//    @JsonSerialize(using = ZonedDateTimeSerialize.class)
     private ZonedDateTime createDateTime;
 
     static final Random random = new Random();
