@@ -8,12 +8,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.Optional;
 import java.util.Random;
 import java.util.UUID;
 
@@ -22,8 +24,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table("t_users")
-@Entity
-public class UserModel implements Serializable {
+public class UserModel implements Serializable, AuditorAware<AdminModel> {
 
     private static final long serialVersionUID = 2657328362534343786L;
     @Id
@@ -57,6 +58,11 @@ public class UserModel implements Serializable {
                 .remark("" + random.nextInt(10))
                 .createDateTime(ZonedDateTime.now())
                 .build();
+    }
+
+    @Override
+    public Optional<AdminModel> getCurrentAuditor() {
+        return Optional.of(AdminModel.builder().id(1L).name("joyceAdmin").build());
     }
 
 }
