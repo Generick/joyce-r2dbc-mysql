@@ -1,6 +1,7 @@
 package com.joyce.r2dbc.mysql.service;
 
 import com.joyce.r2dbc.mysql.dao.UserRepository;
+import com.joyce.r2dbc.mysql.dto.UserDto;
 import com.joyce.r2dbc.mysql.model.UserModel;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,5 +38,17 @@ public class UserService {
 
     public Mono<UserModel> findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    public Mono<UserDto> findByUsernameForDto(String username) {
+        return userRepository.findByUsernameForDto(username);
+    }
+
+    public Mono<UserDto> findByUsernameAndAge(String username, Integer age) {
+        UserDto dto = UserDto.builder()
+                .age(age)
+                .username(username)
+                .build();
+        return userRepository.findByUsernameAndAge(dto);
     }
 }
