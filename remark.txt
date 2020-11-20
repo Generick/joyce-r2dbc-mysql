@@ -24,25 +24,41 @@ import java.util.List;
 @Configuration
 public class ConfigConverter {
 
+    @Autowired R2dbcCustomConversions service;
+
+//    @Bean("joyce_LocalDateTimeToZonedDateTimeConverter")
+//    public String getConfigurableWebBindingInitializer(
+//           @Autowired LocalDateTimeToZonedDateTimeConverter timeConverter
+//    ) {
+//        GenericConversionService s = new GenericConversionService();
+//        s.addConverter(timeConverter);
+//        service.registerConvertersIn(s);
+//        log.info(" ======================================== service.class ==== " + service.getClass().getName());
+//
+//        return "joyce_LocalDateTimeToZonedDateTimeConverter";
+//    }
+
     /*
-    refer spring source code: R2dbcDataAutoConfiguration.class -  public R2dbcCustomConversions r2dbcCustomConversions()
+    refer R2dbcDataAutoConfiguration.class -  public R2dbcCustomConversions r2dbcCustomConversions()
      */
     @Bean
 //    @ConditionalOnMissingBean
-    public R2dbcCustomConversions getR2dbcCustomConversions(
+    public R2dbcCustomConversions r2dbcCustomConversions(
             @Autowired DatabaseClient databaseClient
             , @Autowired LocalDateTimeToZonedDateTimeConverter timeConverter
     ) {
         R2dbcDialect dialect = DialectResolver.getDialect(databaseClient.getConnectionFactory());
         List<Object> converters = new ArrayList<>(dialect.getConverters());
         converters.addAll(R2dbcCustomConversions.STORE_CONVERTERS);
-
-        // add custom datetime converter
         converters.add(timeConverter);
 
         R2dbcCustomConversions customConversions = new R2dbcCustomConversions(
                 CustomConversions.StoreConversions.of(dialect.getSimpleTypeHolder(), converters),
                 Collections.emptyList());
+
+        GenericConversionService s = new GenericConversionService();
+        s.addConverter(timeConverter);
+        customConversions.registerConvertersIn(s);
 
         return customConversions;
     }
