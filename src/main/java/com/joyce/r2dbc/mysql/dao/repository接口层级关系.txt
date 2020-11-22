@@ -1,0 +1,19 @@
+
+
+low --> high
+
+R2dbcRepository --> ReactiveSortingRepository --> ReactiveCrudRepository --> Repository
+
+
+
+JpaRepository --> PagingAndSortingRepository --> CrudRepository --> Repository
+
+
+
+
+
+
+
+
+
+

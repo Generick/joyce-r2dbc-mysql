@@ -6,6 +6,7 @@ import com.joyce.r2dbc.mysql.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.data.relational.core.sql.In;
 import org.springframework.r2dbc.core.DatabaseClient;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 import reactor.util.function.Tuple2;
+
+import java.util.stream.Stream;
 
 /**
  * @author: Joyce Zhu
@@ -66,5 +69,14 @@ public class UserController {
                 ;
         return user;
     }
+
+//    @RequestMapping("/user/pagingAndSortingUserModel/{page}/{size}")
+//    public Page<UserModel> pagingAndSortingUserModel(
+//            @PathVariable("page") Integer page
+//            , @PathVariable("size") Integer size
+//    ) {
+//        Page<UserModel> user = userService.pagingAndSortingUserModel(page, size);
+//        return user;
+//    }
 
 }

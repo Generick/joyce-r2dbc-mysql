@@ -31,7 +31,6 @@ public class ConfigCustomConverter extends AbstractR2dbcConfiguration {
         List converterList = new ArrayList();
         converterList.add(timeConverter);
 //        converterList.add(new org.springframework.data.r2dbc.test.PersonWriteConverter());
-        log.info("------------------------ joyce converter ..");
         return converterList;
     }
 }
