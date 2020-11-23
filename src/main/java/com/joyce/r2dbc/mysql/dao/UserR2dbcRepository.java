@@ -1,4 +1,4 @@
-package com.joyce.r2dbc.mysql.dao_r2dbc;
+package com.joyce.r2dbc.mysql.dao;
 
 import com.joyce.r2dbc.mysql.dto.UserDto;
 import com.joyce.r2dbc.mysql.model.UserModel;
