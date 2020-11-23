@@ -9,7 +9,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.domain.AuditorAware;
-import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
@@ -23,7 +22,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table("t_users")
+@org.springframework.data.relational.core.mapping.Table("t_users") // as r2dbc model
 public class UserModel implements Serializable, AuditorAware<AdminModel> {
 
     private static final long serialVersionUID = 2657328362534343786L;

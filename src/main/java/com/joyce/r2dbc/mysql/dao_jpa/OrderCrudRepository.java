@@ -1,4 +1,4 @@
-package com.joyce.r2dbc.mysql.dao;
+package com.joyce.r2dbc.mysql.dao_jpa;
 
 import org.springframework.data.repository.CrudRepository;
 
